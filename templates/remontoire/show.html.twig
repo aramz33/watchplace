@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Remontoire{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Mon Remontoire</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ remontoire.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ remontoire.nom }}</td>
+        </tr>
+        <tr>
+            <th>Membre</th>
+            <td>{{ remontoire.member.nom }}</td>
+        </tr>
+        <tr>
+            <th>Mes Montres</th>
+            <td>
+                <ul>
+                    {% for montre in remontoire.montres %}
+                        <li><a href="{{ path('montre_show', { 'id': montre.id }) }}">{{ montre }}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

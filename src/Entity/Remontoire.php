@@ -18,6 +18,13 @@ class Remontoire
     #[ORM\OneToMany(mappedBy: 'remontoire_id', targetEntity: Montre::class)]
     private Collection $montres;
 
+    #[ORM\ManyToOne(inversedBy: 'remontoires')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Member $member = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nom = null;
+
 
     public function __construct()
     {
@@ -67,6 +74,30 @@ class Remontoire
                 $montre->setRemontoireId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    public function setMember(?Member $member): static
+    {
+        $this->member = $member;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }

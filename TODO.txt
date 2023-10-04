@@ -16,13 +16,13 @@ guide de réalisation du projet : https://www-inf.telecom-sudparis.eu/COURS/CSC4
 6 : ajout d'une interface EasyAdmin dans le back-office avec les 2 contrôleurs CRUD             ok
        pour Album                                                                               OK
        pour Panini                                                                              OK
-       navigation entre Album et ses Paninis                                                    NON
+       navigation entre Album et ses Paninis                                                    ok
 7 : ajout de l'entité Membre et du lien Membre-Album                                            OK
        ajout de Membre au modèle de données                                                     OK
        ajout de l'association 1-N entre Membre et Album                                         OK
-8 : création des pages du "front-office" de consultation des Album                              NON
-       consultation de la liste des Albums                                                      NON
-       consultation d'une fiche d'Album à partir de la liste                                    NON
+8 : création des pages du "front-office" de consultation des Album                              ok
+       consultation de la liste des Albums                                                      ok
+       consultation d'une fiche d'Album à partir de la liste                                    ok
 9 : ajout de la navigation entre Album et Panini dans le back-office                            NON
 10 : utilisation de gabarits pour les pages de consultation du front-office                     NON
        consultation d'un Panini                                                                 NON

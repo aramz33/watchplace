@@ -12,24 +12,27 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // Créez un membre
         $member = new Member();
         $member->setNom('Example Name');
-
         $manager->persist($member);
 
-        $remontoire = new Remontoire();
-        $remontoire->setId(1);
-        $remontoire->setNom('Example Name');
-        $remontoire->setMember($member);
+        // Créez plusieurs remontoires reliés au même membre
+        for ($i = 1; $i <= 3; $i++) {
+            $remontoire = new Remontoire();
+            $remontoire->setId($i);
+            $remontoire->setNom('Remontoire ' . $i);
+            $remontoire->setMember($member);
+            $manager->persist($remontoire);
 
-        $manager->persist($remontoire);
-
-        $montre = new Montre();
-        $montre->setBrand('Example Brand');
-        $montre->setRemontoireId($remontoire);
-
-        $manager->persist($montre);
-
+            // Créez plusieurs montres reliées au même remontoire
+            for ($j = 1; $j <= 2; $j++) {
+                $montre = new Montre();
+                $montre->setBrand('Montre ' . $j);
+                $montre->setRemontoireId($remontoire);
+                $manager->persist($montre);
+            }
+        }
 
         $manager->flush();
     }

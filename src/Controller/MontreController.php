@@ -20,6 +20,7 @@ class MontreController extends AbstractController
 
         return $this->render('montre/show.html.twig', [
             'montre' => $montre,
+            'url' => $this->generateUrl('remontoire_index', ['id' => $montre->getRemontoireId()->getId()])
         ]);
     }
 }

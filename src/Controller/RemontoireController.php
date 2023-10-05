@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RemontoireController extends AbstractController
 {
-    #[Route('/remontoire', name: 'app_remontoire')]
+    #[Route('/remontoire', name: 'remontoire_index')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
@@ -37,6 +37,7 @@ class RemontoireController extends AbstractController
 
         return $this->render('remontoire/show.html.twig', [
             'remontoire' => $remontoire,
+            'url' => $this->generateUrl('remontoire_index')
         ]);
     }
 }

@@ -11,13 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MontreController extends AbstractController
 {
-    #[Route('/montre', name: 'app_montre')]
-    public function index(): Response
-    {
-        return $this->render('montre/index.html.twig', [
-            'controller_name' => 'MontreController',
-        ]);
-    }
+
     #[Route('/montre/{id}', name: 'montre_show', requirements: ['id' => '\d+'])]
     public function show(ManagerRegistry $doctrine, $id): Response
     {

@@ -1,5 +1,19 @@
 guide de réalisation du projet : https://www-inf.telecom-sudparis.eu/COURS/CSC4101/projet/index.html
 
+COMMANDE UTILES :
+symfony console make:controller
+
+symfony console doctrine:database:drop --force
+symfony console doctrine:database:create
+symfony console doctrine:schema:drop --force
+symfony console doctrine:schema:create
+symfony console doctrine:schema:update --force
+
+symfony console make:entity
+
+symfony console doctrine:fixtures:load
+symfony console make:migration
+symfony console doctrine:migrations:migrate
 
 
 1 : prise de connaissance du cahier des charges                                                 OK

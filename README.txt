@@ -1,7 +1,8 @@
 Domaine fonctionnel: Amateur de montres
 
-objet --> Montre
-inventaire --> Remontoire
+objet --> Montre : int $id; string $brand; Remontoire $remontoire_id;
+inventaire --> Remontoire : int $id; string $nom ; Collection $montres; Member $member
+membre --> Member : int $id; string $nom; Collection $remontoires;
 galerie --> Vitrine
 
 

@@ -1,0 +1,10 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        remontoires:
+          label: 'Mes Remontoires'
+          route: 'remontoire_index'
+        admin:
+            label: 'EasyAdmin'
+            route: 'admin'

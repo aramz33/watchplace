@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Member;
 use App\Entity\Remontoire;
+use App\Entity\Vitrine;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -46,6 +48,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Tes Remontoires', 'fas fa-list', Remontoire::class);
         yield MenuItem::linkToCrud('Tes Montres', 'fas fa-list', Montre::class);
+        yield MenuItem::linkToCrud('Tes Membres', 'fas fa-list', Member::class);
+        yield MenuItem::linkToCrud('Tes Vitrines', 'fas fa-list', Vitrine::class);
 
     }
 }

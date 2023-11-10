@@ -1,4 +1,8 @@
-guide de réalisation du projet : https://www-inf.telecom-sudparis.eu/COURS/CSC4101/projet/index.html
+guide de réalisation du projet :
+https://www-inf.telecom-sudparis.eu/COURS/CSC4101/projet/index.html
+
+Check list avancement du projet:
+https://www-inf.telecom-sudparis.eu/COURS/CSC4101/projet/checklist-projet.html
 
 COMMANDE UTILES :
 symfony console make:controller

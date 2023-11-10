@@ -21,9 +21,18 @@ class Member
     #[ORM\OneToMany(mappedBy: 'member', targetEntity: Remontoire::class, orphanRemoval: true)]
     private Collection $remontoires;
 
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Vitrine::class, orphanRemoval: true)]
+    private Collection $vitrines;
+
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
     public function __construct()
     {
         $this->remontoires = new ArrayCollection();
+        $this->vitrines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +76,36 @@ class Member
             // set the owning side to null (unless already changed)
             if ($remontoire->getMember() === $this) {
                 $remontoire->setMember(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vitrine>
+     */
+    public function getVitrines(): Collection
+    {
+        return $this->vitrines;
+    }
+
+    public function addVitrine(Vitrine $vitrine): static
+    {
+        if (!$this->vitrines->contains($vitrine)) {
+            $this->vitrines->add($vitrine);
+            $vitrine->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVitrine(Vitrine $vitrine): static
+    {
+        if ($this->vitrines->removeElement($vitrine)) {
+            // set the owning side to null (unless already changed)
+            if ($vitrine->getCreator() === $this) {
+                $vitrine->setCreator(null);
             }
         }
 

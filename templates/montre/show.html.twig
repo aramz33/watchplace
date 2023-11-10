@@ -40,9 +40,10 @@
 
 {% block body %}
     <div class="example-wrapper">
-        <h1>{{ montre.brand }}! ✅</h1>
+        <h1>{{ montre.brand }}</h1>
+        <p>ID {{ montre.id }}</p>
 
-        <a href='{{ url }}' class="btn">Back</a>
+        <a href='{{ url }}' class="btn">Back </a>
 
     </div>
 {% endblock %}

@@ -1,13 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Vitrine{% endblock %}
+{% block title %}Modifier Vitrine{% endblock %}
 
 {% block body %}
-    <h1>Edit Vitrine</h1>
+    <div class="container mt-4">
+        <h1 class="text-center" style="color: #008157;">Modifier Vitrine</h1>
 
-    {{ include('vitrine/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="my-4">
+            {{ include('vitrine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
 
-    <a href="{{ path('member_index') }}">Back</a>
+        <div class="text-center mb-3">
+            <a href="{{ path('member_index') }}" class="btn btn-custom-outline">Retour</a>
+        </div>
 
-    {{ include('vitrine/_delete_form.html.twig') }}
+        <div class="text-center">
+            {{ include('vitrine/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <style>
+        .btn-custom-outline {
+            border: 1px solid #008157; /* Bordure Vert Rolex */
+            color: #008157; /* Texte Vert Rolex */
+        }
+
+        .btn-custom-outline:hover {
+            background-color: #008157; /* Fond Vert Rolex */
+            color: white;
+        }
+
+        /* Ajoutez ici un style pour le bouton de suppression si nécessaire */
+    </style>
 {% endblock %}

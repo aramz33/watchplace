@@ -3,21 +3,29 @@
 namespace App\DataFixtures;
 
 use App\Entity\Remontoire;
+use App\Entity\User;
 use App\Entity\Vitrine;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Montre;
 use App\Entity\Member;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class,
+        ];
+    }
+
     public function load(ObjectManager $manager): void
     {
 
-            $member = new Member();
-            $member->setNom('Test Member');
-            $manager->persist($member);
+        $members = $manager->getRepository(Member::class)->findAll();
 
+        foreach ($members as $member) {
             // Création de plusieurs remontoires pour le membre
             for ($i = 1; $i <= 3; $i++) {
                 $remontoire = new Remontoire();
@@ -42,6 +50,8 @@ class AppFixtures extends Fixture
                 $vitrine->setCreator($member);
                 $manager->persist($vitrine);
             }
+        }
+
 
         $manager->flush();
     }

@@ -2,13 +2,28 @@
 
 {% block title %}WOW regarde la belle montre{% endblock %}
 
-
 {% block body %}
-    <div class="example-wrapper">
-        <h1>{{ montre.brand }}</h1>
-        <p>ID {{ montre.id }}</p>
-
-        <a href='{{ url }}' class="btn">Back </a>
-
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1 class="card-title" style="color: #008157;">{{ montre.brand }}</h1>
+                <p class="card-text">ID {{ montre.id }}</p>
+            </div>
+            <div class="card-footer">
+                <a href='{{ url }}' class="btn btn-custom-outline">Retour</a>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .btn-custom-outline {
+            border: 1px solid #008157; /* Bordure Vert Rolex */
+            color: #008157; /* Texte Vert Rolex */
+        }
+
+        .btn-custom-outline:hover {
+            background-color: #008157; /* Fond Vert Rolex */
+            color: white;
+        }
+    </style>
 {% endblock %}

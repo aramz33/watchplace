@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Vitrine{% endblock %}
+{% block title %}Nouvelle Montre{% endblock %}
 
 {% block main %}
     <div class="container mt-4">
-        <h1 class="text-center" style="color: #008157;">Créer une Nouvelle Vitrine</h1>
+        <h1 class="text-center" style="color: #008157;">Créer une nouvelle Montre</h1>
 
         <div class="my-4">
-            {{ include('vitrine/_form.html.twig') }}
+            {{ include('montre/_form.html.twig') }}
         </div>
 
         <div class="text-center">
-            <a href="{{ path('app_vitrine_index', {'id' : member.id}) }}" class="btn btn-custom-outline">Retour</a>
+            <a href="{{ path('remontoire_show', {'remontoire_id' : remontoire.id, 'member_id' : remontoire.member.id}) }}" class="btn btn-custom-outline">Retour</a>
         </div>
     </div>
 

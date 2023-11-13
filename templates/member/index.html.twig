@@ -1,93 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes Remontoires{% endblock %}
-
-{#  {% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            background-color: #333;
-            color: #fff;
-            padding: 15px;
-            margin: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        ul {
-            list-style: none;
-        }
-    </style>
-{% endblock %}
-#}
+{% block title %}Member {{ member.nom }}{% endblock %}
 
 {% block main %}
-    <div class="example-wrapper">
-        <h1>Members</h1>
-        <table>
-            <thead>
+    <div class="container">
+        <h1 class="text-center my-4" style="color: #008157;">Votre espace WatchPlace !</h1>
+        <table class="table table-hover">
+            <thead class="table-light">
             <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Action</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            {% for member in members %}
-                <tr>
-                    <td>{{ member.id }}</td>
-                    <td>{{ member.nom }}</td>
-                    <td>
-                        <a href="{{ path('member_show', {'id': member.id}) }}" class="btn btn-primary btn-sm">Afficher mes remontoires</a>
-                        <a href=" {{ path('app_vitrine_index', {'id': member.id}) }}" class="btn btn-primary btn-sm">Afficher les vitrines publiques </a>
-                    </td>
-                </tr>
-
-            {% else %}
-                <tr>
-                    <td colspan="4">Pas d'enregistrements trouvés</td>
-                </tr>
-            {% endfor %}
+            <tr>
+                <td>{{ member.nom }}</td>
+                <td>
+                    <a href="{{ path('member_show', {'id': member.id}) }}" class="btn btn-custom-green btn-sm">Afficher mes remontoires</a>
+                    <a href="{{ path('app_vitrine_index', {'id': member.id}) }}" class="btn btn-custom-grey btn-sm">Afficher les vitrines publiques</a>
+                    <a href="{{ path('app_my_vitrines', {'id': app.user.member.id})}}" class="btn btn-custom-outline btn-sm">Mes Vitrines</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
+
+    <style>
+        .btn-custom-green {
+            background-color: #008157; /* Vert Rolex */
+            color: white;
+        }
+
+        .btn-custom-green:hover {
+            background-color: #00635D; /* Vert foncé */
+            color: white;
+        }
+
+        .btn-custom-grey {
+            background-color: #d6d8db; /* Gris moyen */
+            color: black;
+        }
+
+        .btn-custom-grey:hover {
+            background-color: #bfc1c3; /* Gris plus foncé */
+            color: black;
+        }
+
+        .btn-custom-outline {
+            border: 1px solid #008157; /* Bordure Vert Rolex */
+            color: #008157; /* Texte Vert Rolex */
+        }
+
+        .btn-custom-outline:hover {
+            background-color: #008157; /* Fond Vert Rolex */
+            color: white;
+        }
+    </style>
 {% endblock %}

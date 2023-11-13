@@ -24,6 +24,9 @@ class Member
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Vitrine::class, orphanRemoval: true)]
     private Collection $vitrines;
 
+    #[ORM\OneToOne(mappedBy: 'member', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __toString(): string
     {
         return $this->getNom();
@@ -108,6 +111,23 @@ class Member
                 $vitrine->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        // set the owning side of the relation if necessary
+        if ($user->getMember() !== $this) {
+            $user->setMember($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

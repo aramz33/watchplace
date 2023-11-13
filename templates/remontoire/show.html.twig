@@ -4,85 +4,99 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        h1 {
-            background-color: #333;
-            color: #fff;
-            padding: 15px;
-            margin: 0;
-        }
+<style>
+    .table-custom {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .table-custom th, .table-custom td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
 
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+    .table-custom th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
 
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
+    .table-custom tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    .list-unstyled {
+        list-style: none;
+        padding: 0;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+    .list-unstyled li {
+        margin-bottom: 5px;
+    }
 
-        li {
-            margin-bottom: 5px;
-        }
+    .btn-custom-green {
+        background-color: #008157; /* Vert Rolex */
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
 
-        a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
+    .btn-custom-green:hover {
+        background-color: #00635D; /* Vert foncé */
+        color: white;
+        text-decoration: none;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    .header-custom {
+        background-color: #d6d8db; /* Gris clair pour se distinguer de la navbar */
+        color: #333; /* Couleur du texte plus foncée pour le contraste */
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
 {% endblock %}
 
+
 {% block body %}
-    <h1>Mon Remontoire</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <td>{{ remontoire.id }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ remontoire.nom }}</td>
-        </tr>
-        <tr>
-            <th>Membre</th>
-            <td>{{ remontoire.member.nom }}</td>
-        </tr>
-        <tr>
-            <th>Mes Montres</th>
-            <td>
-                <ul>
-                    {{ dump(remontoire) }}
-                    {% for montre in remontoire.montres %}
-                        <li><a href="{{ path('montre_show', { 'id': montre.id }) }}">{{ montre }}</a></li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <a href='{{ url }}'>Back</a>;
+    <div class="header-custom">
+        <h1>Remontoire {{ remontoire.nom }}</h1>
+    </div>
+    <div class="container">
+        <table class="table-custom">
+            <tr>
+                <th>ID</th>
+                <td>{{ remontoire.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ remontoire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Membre</th>
+                <td>{{ remontoire.member.nom }}</td>
+            </tr>
+            <tr>
+                <th>Mes Montres</th>
+                <td>
+                    <ul>
+                        {% for montre in remontoire.montres %}
+                            <li><a href="{{ path('montre_show', { 'id': montre.id }) }}">{{ montre }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="text-center mt-3">
+            <a href="{{ path('montre_new', { 'id': remontoire.id }) }}" class="btn-custom-green">Ajouter une montre</a>
+            <a href='{{ url }}' class="btn-custom-green">Retour</a>
+        </div>
+    </div>
 {% endblock %}

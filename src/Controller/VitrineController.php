@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Core\Security;
 
 
 #[Route('/vitrine')]
@@ -42,29 +43,6 @@ class VitrineController extends AbstractController
     }
 
 
-    #[Route('/new/{id}', name: 'app_vitrine_new',  requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function new(Request $request,EntityManagerInterface $entityManager, VitrineRepository $vitrineRepository, Member $member): Response
-    {
-        $vitrine = new Vitrine();
-        $vitrine->setCreator($member);
-        $form = $this->createForm(Vitrine1Type::class, $vitrine);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($vitrine);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('member_index', ['id' => $member->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('vitrine/new.html.twig', [
-            'member' => $member,
-            'vitrine' => $vitrine,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/member/{id}/show', name: 'app_vitrine_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Vitrine $vitrine, ManagerRegistry $doctrine, $id): Response
     {
@@ -90,33 +68,74 @@ class VitrineController extends AbstractController
         return $this->render('vitrine/show.html.twig', [
 
             'vitrine' => $vitrine,
-            'url' => $this->generateUrl('app_my_vitrines', ['id' => $member->getId()]),
+            'url' => $this->generateUrl('member_index', ['id' => $member->getId()]),
             'member' => $member,
         ]);
     }
 
 
-    #[Route('/{id}/edit', name: 'app_vitrine_edit', methods: ['GET', 'POST'])]
+    #[Route('/new/{id}', name: 'app_vitrine_new',  requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function edit(Request $request, Vitrine $vitrine, EntityManagerInterface $entityManager, Member $member): Response
+    public function new(Request $request,EntityManagerInterface $entityManager, VitrineRepository $vitrineRepository, Member $member): Response
     {
+        $vitrine = new Vitrine();
+        $vitrine->setCreator($member);
+        $form = $this->createForm(Vitrine1Type::class, $vitrine);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($vitrine);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('member_index', ['id' => $member->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('vitrine/new.html.twig', [
+            'member' => $member,
+            'vitrine' => $vitrine,
+            'form' => $form,
+        ]);
+    }
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+
+
+    #[Route('/member/{member_id}/vitrine/edit/{vitrine_id}', name: 'app_vitrine_edit', requirements: ['member_id' => '\d+', 'vitrine_id' => '\d+'], methods: ['GET', 'POST'])]
+    public function edit(Request $request, EntityManagerInterface $entityManager, $member_id, $vitrine_id,ManagerRegistry $doctrine): Response
+    {
+        $user = $this->security->getUser();
+        $member = $user->getMember();
+
+        if ($member->getId() != $member_id) {
+            // Handle the case where the logged-in member is not the one associated with the member_id
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        $vitrine = $entityManager->getRepository(Vitrine::class)->find($vitrine_id);
+        if (!$vitrine) {
+            throw $this->createNotFoundException('Vitrine not found.');
+        }
+
         $form = $this->createForm(Vitrine1Type::class, $vitrine);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_vitrine_index', ['id' => $member->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('member_index', ['id' => $member_id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('vitrine/edit.html.twig', [
             'vitrine' => $vitrine,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/delete/vitrine/{id}', name: 'app_vitrine_delete',requirements: ['id' => '\d+'], methods: ['POST'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function delete(Request $request, Vitrine $vitrine, EntityManagerInterface $entityManager, ManagerRegistry $doctrine, $id): Response
     {
         $entity_manager = $doctrine->getManager();
@@ -127,13 +146,11 @@ class VitrineController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_my_vitrines', ['id' => $id, 'vitrine' => $vitrine, 'member'=>$member], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('member_index', ['id' => $id], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{vitrine_id}/montre/{montre_id}', methods: ['GET'], name: 'app_vitrine_montre_show')]
-    public function MontreShow( #[MapEntity(id: 'vitrine_id')] Vitrine $vitrine,
-       #[MapEntity(id: 'montre_id')]
-       Montre $montre ): Response
+    public function MontreShow( #[MapEntity(id: 'vitrine_id')] Vitrine $vitrine, #[MapEntity(id: 'montre_id')] Montre $montre ): Response
    {
        if(! $vitrine->getMontres()->contains($montre)) {
            throw $this->createNotFoundException("Montre introuvable dans cette vitrine!");

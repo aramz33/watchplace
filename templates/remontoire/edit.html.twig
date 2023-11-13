@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Vitrine{% endblock %}
+{% block title %}Modifier Remontoire{% endblock %}
 
-{% block main %}
+{% block body %}
     <div class="container mt-4">
-        <h1 class="text-center" style="color: #008157;">Créer une Nouvelle Vitrine</h1>
+        <h1 class="text-center" style="color: #008157;">Modifier Votre Remontoire</h1>
 
         <div class="my-4">
-            {{ include('vitrine/_form.html.twig') }}
+            {{ include('remontoire/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
         </div>
 
-        <div class="text-center">
-            <a href="{{ path('app_my_vitrines', {'id' : member.id}) }}" class="btn btn-custom-outline">Retour</a>
+        <div class="text-center mb-3">
+            <a href="{{ path('member_index') }}" class="btn btn-custom-outline">Retour</a>
         </div>
     </div>
 
@@ -25,5 +25,6 @@
             background-color: #008157; /* Fond Vert Rolex */
             color: white;
         }
+
     </style>
 {% endblock %}

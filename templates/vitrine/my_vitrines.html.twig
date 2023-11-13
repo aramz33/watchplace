@@ -23,7 +23,7 @@
                     <td>{{ vitrine.published ? 'Oui' : 'Non' }}</td>
                     <td>
                         <a href="{{ path('app_vitrine_show', {'id': vitrine.id}) }}" class="btn btn-custom-green btn-sm">Voir</a>
-                        <a href="{{ path('app_vitrine_edit', {'id': vitrine.id}) }}" class="btn btn-custom-grey btn-sm">Modifier</a>
+                        <a href="{{ path('app_vitrine_edit', {'vitrine_id': vitrine.id, 'member_id' : member.id})}}" class="btn btn-custom-grey btn-sm">Modifier</a>
                         <a class="btn btn-danger btn-sm">
                             {{ include('vitrine/_delete_form.html.twig') }}
                         </a>

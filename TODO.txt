@@ -55,14 +55,14 @@ symfony console doctrine:migrations:migrate
 10 : utilisation de gabarits pour les pages de consultation du front-office                     ok
        consultation d'une Montre                                                                ok
        consultation de la liste des Montres d'un Remontoire                                     ok
-       navigation d'une Vitrine vers la consultation de ses Montres                             non
-11 : intégration d'une mise en forme CSS avec Bootstrap dans les gabarits Twig                  NON
-12 : intégration de menus de navigation                                                         NON
-13 : ajout de l'entité [galerie] au modèle des données et de l'association M-N avec Panini      NON
-14 : ajout de [galerie] dans le back-office                                                     NON
-15 : ajout d'un contrôleur CRUD au front-office pour [galerie]                                  NON
-16 : ajout de fonctions CRUD au front-office pour Album                                         NON
-17 : ajout de la consultation des Paninis depuis les [galeries] publiques                       NON
+       navigation d'une Vitrine vers la consultation de ses Montres                             ok
+11 : intégration d'une mise en forme CSS avec Bootstrap dans les gabarits Twig                  ok
+12 : intégration de menus de navigation                                                         ok
+13 : ajout de l'entité Vitrine au modèle des données et de l'association M-N avec Montre        ok
+14 : ajout de Vitrine dans le back-office                                                       ok
+15 : ajout d'un contrôleur CRUD au front-office pour Vitrine                                    ok
+16 : ajout de fonctions CRUD au front-office pour Remontoire                                    ok
+17 : ajout de la consultation des Montres depuis les Vitrines publiques                         ok
 18 : ajout d'un contrôleur CRUD pour Membres                                                    NON
 19 : consultation de la liste des seuls inventaires d'un membre dans le front-office            NON
 20 : contextualisation de la création d'Album en fonction du Membre                             NON

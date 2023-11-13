@@ -24,7 +24,7 @@
                     <td>
                         <a href="{{ path('app_vitrine_show', {'id': vitrine.id}) }}" class="btn btn-custom-green btn-sm">Voir</a>
                         {% if app.user and app.user.member and app.user.member.id == vitrine.creator.id %}
-                            <a href="{{ path('app_vitrine_edit', {'id': vitrine.id}) }}" class="btn btn-custom-grey btn-sm">Modifier</a>
+                            <a href="{{ path('app_vitrine_edit', {'vitrine_id': vitrine.id, 'member_id' : member.id}) }}" class="btn btn-custom-grey btn-sm">Modifier</a>
                         {% endif %}
                     </td>
                 </tr>

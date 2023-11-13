@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Montre;
 use App\Entity\Vitrine;
 use App\Repository\MontreRepository;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +27,7 @@ class Vitrine1Type extends AbstractType
             ->add('montres', null, [
                 'by_reference' => false,
                 // classe pas obligatoire
-                //'class' => [Object]::class,
+                'class' => Montre::class,
                 // permet sélection multiple
                 'multiple' => true,
                 // affiche sous forme de checkboxes

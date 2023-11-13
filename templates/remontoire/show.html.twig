@@ -95,8 +95,34 @@
             </tr>
         </table>
         <div class="text-center mt-3">
+            <a href="{{ path('app_remontoire_edit', {'remontoire_id': remontoire.id, 'member_id' : remontoire.member.id})}}" class="btn btn-custom-grey btn-sm">Modifier</a>
+            <form action="{{ path('app_remontoire_delete', {'id': remontoire.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display: inline;">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ remontoire.id) }}">
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+            </form>
             <a href="{{ path('montre_new', { 'id': remontoire.id }) }}" class="btn-custom-green">Ajouter une montre</a>
             <a href='{{ url }}' class="btn-custom-green">Retour</a>
         </div>
     </div>
+    <style>
+        .btn-custom-green {
+            background-color: #008157; /* Vert Rolex */
+            color: white;
+        }
+
+        .btn-custom-green:hover {
+            background-color: #00635D; /* Vert foncé */
+            color: white;
+        }
+
+        .btn-custom-grey {
+            background-color: #d6d8db; /* Gris moyen */
+            color: black;
+        }
+
+        .btn-custom-grey:hover {
+            background-color: #bfc1c3; /* Gris plus foncé */
+            color: black;
+        }
+    </style>
 {% endblock %}

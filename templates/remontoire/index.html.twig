@@ -80,6 +80,7 @@
                     <td>{{ remontoire.member.nom }}</td>
                     <td>
                         <a href="{{ path('remontoire_show', {'id': remontoire.id}) }}" class="btn btn-primary btn-sm">Afficher</a>
+                        <a href="{{ path('app_remontoire_edit', {'remontoire_id': remontoire.id, 'member_id' : member.id})}}" class="btn btn-custom-grey btn-sm">Modifier</a>
                     </td>
                 </tr>
             {% else %}

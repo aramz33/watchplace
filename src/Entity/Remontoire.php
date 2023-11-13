@@ -18,7 +18,7 @@ class Remontoire
     #[ORM\OneToMany(mappedBy: 'remontoire_id', targetEntity: Montre::class)]
     private Collection $montres;
 
-    #[ORM\ManyToOne(inversedBy: 'remontoires')]
+    #[ORM\ManyToOne(inversedBy: 'remontoires', targetEntity: Member::class, cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Member $member = null;
 

@@ -76,6 +76,7 @@
             <th>Mes Montres</th>
             <td>
                 <ul>
+                    {{ dump(remontoire) }}
                     {% for montre in remontoire.montres %}
                         <li><a href="{{ path('montre_show', { 'id': montre.id }) }}">{{ montre }}</a></li>
                     {% endfor %}

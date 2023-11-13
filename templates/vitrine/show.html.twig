@@ -19,10 +19,21 @@
                 <th>Published</th>
                 <td>{{ vitrine.published ? 'Yes' : 'No' }}</td>
             </tr>
+            <tr>
+                <h2>Montres</h2>
+                <ul>
+                    {% for montre in vitrine.montres %}
+                        <li>
+                            <a href="{{ path('app_vitrine_montre_show', {'vitrine_id': vitrine.id, 'montre_id' : montre.id}) }}">{{ montre }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_vitrine_index') }}">back to list</a>
+    <a href="{{ url }}">Back</a>
 
     <a href="{{ path('app_vitrine_edit', {'id': vitrine.id}) }}">edit</a>
 

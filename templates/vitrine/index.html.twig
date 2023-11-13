@@ -2,7 +2,7 @@
 
 {% block title %}Vitrine index{% endblock %}
 
-{% block body %}
+{% block main %}
     <h1>Vitrine index</h1>
 
     <table class="table">
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_vitrine_new') }}">Create new</a>
+    <a href="{{ path('app_vitrine_new', {'id': member.id}) }}">Create new</a>
 {% endblock %}

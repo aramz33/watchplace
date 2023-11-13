@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre {{ member.id }}{% endblock %}
+
+
+{% block main %}
+    <h1>Membre {{ member.id }}</h1>
+    {% for remontoire in member.remontoires %}
+        <li><a href="{{ path('remontoire_show', {'id' : remontoire.id}) }}">Remontoire {{ remontoire.nom }}</a></li>
+    {% endfor %}
+
+    <a href="{{ path('app_remontoire_new', {'id': member.id})}}">Add remontoire</a>
+
+
+    <a href='{{ url }}' class="btn">Back </a>
+
+
+{% endblock %}

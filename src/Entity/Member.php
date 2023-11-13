@@ -26,7 +26,7 @@ class Member
 
     public function __toString(): string
     {
-        return $this->nom;
+        return $this->getNom();
     }
 
     public function __construct()

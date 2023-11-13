@@ -62,26 +62,26 @@
 
 {% block main %}
     <div class="example-wrapper">
-        <h1>Mes Remontoires</h1>
+        <h1>Members</h1>
         <table>
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
-                <th>Membre</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            {% for remontoire in remontoires %}
+            {% for member in members %}
                 <tr>
-                    <td>{{ remontoire.id }}</td>
-                    <td>{{ remontoire.nom }}</td>
-                    <td>{{ remontoire.member.nom }}</td>
+                    <td>{{ member.id }}</td>
+                    <td>{{ member.nom }}</td>
                     <td>
-                        <a href="{{ path('remontoire_show', {'id': remontoire.id}) }}" class="btn btn-primary btn-sm">Afficher</a>
+                        <a href="{{ path('member_show', {'id': member.id}) }}" class="btn btn-primary btn-sm">Afficher mes remontoires</a>
+                        <a href=" {{ path('app_vitrine_index', {'id': member.id}) }}" class="btn btn-primary btn-sm">Afficher les vitrines publiques </a>
                     </td>
                 </tr>
+
             {% else %}
                 <tr>
                     <td colspan="4">Pas d'enregistrements trouvés</td>
@@ -89,6 +89,5 @@
             {% endfor %}
             </tbody>
         </table>
-        <a href="{{ path('app_remontoire_new') }}">Create new</a>
     </div>
 {% endblock %}

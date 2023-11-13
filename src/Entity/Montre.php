@@ -18,7 +18,7 @@ class Montre
     #[ORM\Column(length: 255)]
     private ?string $brand = null;
 
-    #[ORM\ManyToOne(targetEntity: Remontoire::class, inversedBy: "montres")]
+    #[ORM\ManyToOne(targetEntity: Remontoire::class, inversedBy: "montres", cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Remontoire $remontoire_id = null;
 
@@ -92,6 +92,7 @@ class Montre
 
         return $this;
     }
+
 
 
 

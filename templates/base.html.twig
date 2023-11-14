@@ -18,10 +18,23 @@
             .navbar-custom .navbar-nav .nav-link {
             color: white;
             }
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .content-wrap {
+                flex: 1 0 auto;
+            }
 
             .footer-custom {
             background-color: #f8f9fa; /* Gris clair */
             color: black;
+                flex-shrink: 0;
             }
 
             .bg-secondary-custom {
@@ -41,6 +54,7 @@
         {% endblock %} {# javascripts #}
     </head>
     <body>
+    <div class="content-wrap">
     {% block menu %}
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm">
@@ -75,11 +89,12 @@
                             </p>
                         </div>
                     </div>
-                {% endblock %} {# main #}
+                {% endblock %}{# main #}
 
             </main>
 
         </div> <!-- /.body-container -->
+    </div> <!-- /.content-wrap -->
 
         {% block footer %}
             <footer class="bg-dark footer-custom text-white text-center py-3 mt-4 ">
@@ -90,5 +105,6 @@
 
 
     {% endblock %} {# body #}
+
     </body>
 </html>

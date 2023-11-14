@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Member;
+use App\Repository\MemberRepository;
 use App\Repository\VitrineRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MemberController extends AbstractController
@@ -46,6 +50,37 @@ class MemberController extends AbstractController
             'url' => $this->generateUrl('member_index' , ['id' => $member->getId()]),
         ]);
 
+    }
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+    #[Route('member/new/{id}', name: 'app_remontoire_new', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function new(Request $request,EntityManagerInterface $entityManager, MemberRepository $memberRepository, Member $member): Response
+    {
+        $member = new Member();
+        $user = $this->security->getUser();
+        $form = $this->createForm(MemberType::class, $member);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($member);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('member_index', ['id' => $member->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+
+        return $this->render('member/new.html.twig', [
+            'member' => $member,
+            'form' => $form,
+
+        ]);
     }
 
 }

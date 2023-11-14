@@ -7,8 +7,6 @@ https://www-inf.telecom-sudparis.eu/COURS/CSC4101/projet/checklist-projet.html
 Dernier checkpoint:
 Génération d’un nouveau contrôleur CRUD au front-office, pour [galerie]    APRÈS TP7
 
-A FAIRE : !!!!!!!!!!!!!!!!
-3. Contextualisation de la création d’un [objet]
 
 On peut donc maintenant appliquer le même genre de modifications la consultation et la création des [objets] à partir de la consultation d’un [inventaire] pour garder le contexte courant (Membre -> [inventaire] -> [objet]), plutôt que de créer les entités « en vrac ».
 
@@ -64,18 +62,18 @@ symfony console doctrine:migrations:migrate
 16 : ajout de fonctions CRUD au front-office pour Remontoire                                    ok
 17 : ajout de la consultation des Montres depuis les Vitrines publiques                         ok
 18 : ajout d'un contrôleur CRUD pour Membres                                                    NON
-19 : consultation de la liste des seuls inventaires d'un membre dans le front-office            NON
-20 : contextualisation de la création d'Album en fonction du Membre                             NON
-21 : contextualisation de la création d'un Panini en fonction de l'Album                        NON
-22 : contextualisation de la création d'une [galerie] en fonction du membre                     NON
-23 : affichage des seules galeries publiques                                                    NON
-24 : contextualisation de l'ajout d'un Panini à une [galerie]                                   NON
-25 : ajout des Utilisateurs au modèle de données et du lien utilisateur - membre                NON
-26 : ajout de l'authentification                                                                NON
-27 : protection de l'accès aux routes interdites réservées aux membres                          NON
-28 : protection de l'accès aux données à leurs seuls propriétaires                              NON
-29 : contextualisation du chargement des données en fonction de l'utilisateur connecté          NON
-30 : Gestion de la suppression                                                                  NON
-31 : ajout de la gestion de la mise en ligne d'images pour des photos dans les Paninis          NON
+19 : consultation de la liste des seuls inventaires d'un membre dans le front-office            ok
+20 : contextualisation de la création de Remontoire en fonction du Membre                       ok
+21 : contextualisation de la création d'une Montre en fonction du Remontoire                    ok
+22 : contextualisation de la création d'une vitrine en fonction du membre                       ok
+23 : affichage des seules galeries publiques                                                    ok
+24 : contextualisation de l'ajout d'une Montre à une Vitrine                                    ok
+25 : ajout des Utilisateurs au modèle de données et du lien utilisateur - membre                ok
+26 : ajout de l'authentification                                                                ok
+27 : protection de l'accès aux routes interdites réservées aux membres                          ok
+28 : protection de l'accès aux données à leurs seuls propriétaires                              ok
+29 : contextualisation du chargement des données en fonction de l'utilisateur connecté          ok
+30 : Gestion de la suppression                                                                  ok
+31 : ajout de la gestion de la mise en ligne d'images pour des photos dans les Montres          NON
 32 : utilisation des messages flash pour les CRUDs                                              NON
 33 : ajout d'une gestion de marque-pages/panier dans le front-office                            NON
